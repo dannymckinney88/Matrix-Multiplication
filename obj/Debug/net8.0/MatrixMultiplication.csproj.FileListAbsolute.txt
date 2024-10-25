@@ -15,3 +15,4 @@ D:\code\MatrixMultiplication\obj\Debug\net8.0\refint\MatrixMultiplication.dll
 D:\code\MatrixMultiplication\obj\Debug\net8.0\MatrixMultiplication.pdb
 D:\code\MatrixMultiplication\obj\Debug\net8.0\MatrixMultiplication.genruntimeconfig.cache
 D:\code\MatrixMultiplication\obj\Debug\net8.0\ref\MatrixMultiplication.dll
+D:\code\MatrixMultiplication\obj\Debug\net8.0\MatrixMultiplication.sourcelink.json
