@@ -1,0 +1,17 @@
+D:\code\MatrixMultiplication\bin\Debug\net8.0\MatrixMultiplication.exe
+D:\code\MatrixMultiplication\bin\Debug\net8.0\MatrixMultiplication.deps.json
+D:\code\MatrixMultiplication\bin\Debug\net8.0\MatrixMultiplication.runtimeconfig.json
+D:\code\MatrixMultiplication\bin\Debug\net8.0\MatrixMultiplication.dll
+D:\code\MatrixMultiplication\bin\Debug\net8.0\MatrixMultiplication.pdb
+D:\code\MatrixMultiplication\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\code\MatrixMultiplication\obj\Debug\net8.0\MatrixMultiplication.csproj.AssemblyReference.cache
+D:\code\MatrixMultiplication\obj\Debug\net8.0\MatrixMultiplication.GeneratedMSBuildEditorConfig.editorconfig
+D:\code\MatrixMultiplication\obj\Debug\net8.0\MatrixMultiplication.AssemblyInfoInputs.cache
+D:\code\MatrixMultiplication\obj\Debug\net8.0\MatrixMultiplication.AssemblyInfo.cs
+D:\code\MatrixMultiplication\obj\Debug\net8.0\MatrixMultiplication.csproj.CoreCompileInputs.cache
+D:\code\MatrixMultiplication\obj\Debug\net8.0\MatrixMu.A191E477.Up2Date
+D:\code\MatrixMultiplication\obj\Debug\net8.0\MatrixMultiplication.dll
+D:\code\MatrixMultiplication\obj\Debug\net8.0\refint\MatrixMultiplication.dll
+D:\code\MatrixMultiplication\obj\Debug\net8.0\MatrixMultiplication.pdb
+D:\code\MatrixMultiplication\obj\Debug\net8.0\MatrixMultiplication.genruntimeconfig.cache
+D:\code\MatrixMultiplication\obj\Debug\net8.0\ref\MatrixMultiplication.dll
