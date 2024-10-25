@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MatrixMultiplication")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1853d6afafebb33753efedbe72413688bcac940f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6e4ce11fcba3811ee761f61e4d5a01b9bdffc8f2")]
 [assembly: System.Reflection.AssemblyProductAttribute("MatrixMultiplication")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MatrixMultiplication")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

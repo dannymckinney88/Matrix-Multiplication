@@ -1,6 +1,7 @@
 ﻿// Program.cs
 using System;
 using System.Threading.Tasks;
+using MatrixMultiplication.Services;
 
 namespace MatrixMultiplication
 {
@@ -8,20 +9,22 @@ namespace MatrixMultiplication
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine("Matrix Multiplication Program Started.");
             var apiService = new ApiService();
 
             try
             {
-                int matrixSize = 1000; 
+                int matrixSize = 1000; // 1000x1000 matrices
                 string matrixInitUrl = $"https://recruitment-test.investcloud.com/api/numbers/init/{matrixSize}";
 
-                Console.WriteLine("Initializing Matrices...");
+                // Initialize matrices on the server
+                Console.WriteLine("Initializing matrices...");
                 string matrixInitData = await apiService.GetApiDataInitAsync(matrixInitUrl);
-                Console.WriteLine("Matrices Initialized.");
+                Console.WriteLine("Matrices initialized successfully.");
                 Console.WriteLine("\nInitialization Response:");
                 Console.WriteLine(matrixInitData);
 
+                // Create MatrixService instance
                 var matrixService = new MatrixService(apiService, matrixSize);
 
                 // Fetch Matrix A
@@ -32,12 +35,16 @@ namespace MatrixMultiplication
                 double[,] matrixB = await matrixService.FetchMatrixAsync("B");
                 matrixService.DisplaySampleData(matrixB, "B");
 
-                // Continue with matrix multiplication or other operations...
+                // Start the multiplication and result processing
+                var matrixProcessor = new MatrixProcessor();
+                await matrixProcessor.ProcessMatricesAsync(matrixA, matrixB, matrixSize, apiService);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
+
+            Console.WriteLine("Program finished.");
         }
     }
 }

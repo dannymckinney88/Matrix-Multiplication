@@ -1,8 +1,8 @@
-// MatrixService.cs
+// Services/MatrixService.cs
 using System;
 using System.Threading.Tasks;
 
-namespace MatrixMultiplication
+namespace MatrixMultiplication.Services
 {
     public class MatrixService
     {
@@ -18,7 +18,6 @@ namespace MatrixMultiplication
         public async Task<double[,]> FetchMatrixAsync(string matrixName)
         {
             double[,] matrix = new double[_matrixSize, _matrixSize];
-
             Console.WriteLine($"Fetching Matrix {matrixName}...");
 
             for (int i = 0; i < _matrixSize; i++)
@@ -35,7 +34,7 @@ namespace MatrixMultiplication
                 }
             }
 
-            Console.WriteLine($"Matrix {matrixName} Data Retrieved.\n");
+            Console.WriteLine($"Matrix {matrixName} data retrieval completed.\n");
             return matrix;
         }
 
@@ -53,6 +52,7 @@ namespace MatrixMultiplication
                 }
                 Console.WriteLine();
             }
+            Console.WriteLine();
         }
     }
 }

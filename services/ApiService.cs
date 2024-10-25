@@ -1,9 +1,11 @@
+// Services/ApiService.cs
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using MatrixMultiplication.Models;
 
-namespace MatrixMultiplication
+namespace MatrixMultiplication.Services
 {
     public class ApiService
     {
@@ -11,47 +13,37 @@ namespace MatrixMultiplication
 
         public ApiService()
         {
-            _client = new HttpClient(); // HTTP Request
+            _client = new HttpClient();
         }
 
-        public async Task<string> GetApiDataInitAsync(string url) // Async Fetch
+        public async Task<string> GetApiDataInitAsync(string url)
         {
             HttpResponseMessage response = await _client.GetAsync(url);
             response.EnsureSuccessStatusCode();
-            string content = await response.Content.ReadAsStringAsync();
-            return content;
+            return await response.Content.ReadAsStringAsync();
         }
 
         public async Task<double[]> GetMatrixRowAsync(string dataset, string type, int idx)
         {
             string apiUrl = $"https://recruitment-test.investcloud.com/api/numbers/{dataset}/{type}/{idx}";
-
             HttpResponseMessage response = await _client.GetAsync(apiUrl);
             response.EnsureSuccessStatusCode();
             string content = await response.Content.ReadAsStringAsync();
-            
-            // Deserialize into ApiResponse
+
             ApiResponse? apiResponse = JsonConvert.DeserializeObject<ApiResponse>(content);
-            if (apiResponse == null)
+            if (apiResponse == null || apiResponse.Value == null)
             {
-                throw new InvalidCastException($"Faild to desrialize API response. Content: {content}");
-            }
-            double[]? rowData = apiResponse.Value;
-
-            if (rowData == null)
-            {
-                throw new InvalidOperationException($"Failed to deserialize matrix row. Dataset: {dataset}, Type: {type}, Index: {idx}, Content: {content}");
+                throw new InvalidOperationException($"Failed to deserialize API response. Content: {content}");
             }
 
-            return rowData;
+            return apiResponse.Value;
         }
-    }
 
-    // Define the ApiResponse class
-    public class ApiResponse
-    {
-        public double[] Value { get; set; } = Array.Empty<double>();
-        public object? Cause { get; set; }
-        public bool Success { get; set; }
+        public async Task<HttpResponseMessage> PostAsync(string url, HttpContent content)
+        {
+            HttpResponseMessage response = await _client.PostAsync(url, content);
+            response.EnsureSuccessStatusCode();
+            return response;
+        }
     }
 }
