@@ -3,10 +3,8 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
-using MatrixMultiplication.Services;
 using Newtonsoft.Json;
 using System.Globalization;
-
 
 namespace MatrixMultiplication.Services
 {
@@ -35,7 +33,8 @@ namespace MatrixMultiplication.Services
             Console.WriteLine($"Total execution time: {totalDuration.TotalSeconds} seconds.");
         }
 
-        private double[,] MultiplyMatrices(double[,] matrixA, double[,] matrixB, int size)
+        // Change method to public for testing
+        public double[,] MultiplyMatrices(double[,] matrixA, double[,] matrixB, int size)
         {
             double[,] result = new double[size, size];
             Console.WriteLine("Starting matrix multiplication...");
@@ -74,7 +73,7 @@ namespace MatrixMultiplication.Services
                 for (int i = 0; i < size; i++) // Inner loop over rows
                 {
                     // Convert number to string with full precision and invariant culture
-                    sb.Append(matrix[i,j]);
+                    sb.Append(matrix[i, j].ToString("G17", CultureInfo.InvariantCulture));
                 }
             }
 
@@ -95,9 +94,8 @@ namespace MatrixMultiplication.Services
             using (MD5 md5 = MD5.Create())
             {
                 byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-                 Console.WriteLine($"This is the inputBytes : {inputBytes}");
                 byte[] hashBytes = md5.ComputeHash(inputBytes);
-                Console.WriteLine($"This is the hashbytes : {hashBytes}");
+
                 // Convert hash bytes to a base64 string (since we should not use Hex)
                 string hashString = Convert.ToBase64String(hashBytes);
 
