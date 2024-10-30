@@ -1,6 +1,8 @@
 // Services/MatrixService.cs
 using System;
 using System.Threading.Tasks;
+using System.Collections.Concurrent;
+
 
 namespace MatrixMultiplication.Services
 {
@@ -18,25 +20,41 @@ namespace MatrixMultiplication.Services
         public async Task<double[,]> FetchMatrixAsync(string matrixName)
         {
             double[,] matrix = new double[_matrixSize, _matrixSize];
+            var logEntries = new ConcurrentBag<string>();
             Console.WriteLine($"Fetching Matrix {matrixName}...");
 
-            for (int i = 0; i < _matrixSize; i++)
-            {
-                double[] row = await _apiService.GetMatrixRowAsync(matrixName, "row", i);
-                for (int j = 0; j < _matrixSize; j++)
-                {
-                    matrix[i, j] = row[j];
-                }
+            // Define a list of tasks for each row
+            var fetchTasks = new Task[_matrixSize];
 
-                if (i % 100 == 0)
+            Parallel.For(0, _matrixSize, i =>
+            {
+                fetchTasks[i] = Task.Run(async () =>
                 {
-                    Console.WriteLine($"Matrix {matrixName}: Retrieved row {i}");
-                }
+                    double[] row = await _apiService.GetMatrixRowAsync(matrixName, "row", i);
+                    for (int j = 0; j < _matrixSize; j++)
+                    {
+                        matrix[i, j] = row[j];
+                    }
+
+                    // Optional: log progress every 100 rows
+                    if (i % 100 == 0)
+                    {
+                        logEntries.Add($"Matrix {matrixName}: Retrieved row {i}");
+                    }
+                });
+            });
+
+            // Wait for all tasks to complete
+            await Task.WhenAll(fetchTasks);
+            foreach (var log in logEntries.OrderBy(log => log))
+            {
+                Console.WriteLine(log);
             }
 
             Console.WriteLine($"Matrix {matrixName} data retrieval completed.\n");
             return matrix;
         }
+
 
         public void DisplaySampleData(double[,] matrix, string matrixName)
         {

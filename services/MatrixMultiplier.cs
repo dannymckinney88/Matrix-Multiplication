@@ -66,14 +66,14 @@ namespace MatrixMultiplication.Services
             Console.WriteLine("Starting result concatenation...");
             var concatenationStartTime = DateTime.Now;
 
-            StringBuilder sb = new StringBuilder(size * size * 10);
+            StringBuilder sb = new StringBuilder(size * size * 10); 
 
             for (int j = 0; j < size; j++) // Outer loop over columns
             {
                 for (int i = 0; i < size; i++) // Inner loop over rows
                 {
-                    // Convert number to string with full precision and invariant culture
-                    sb.Append(matrix[i, j].ToString("G17", CultureInfo.InvariantCulture));
+             
+                    sb.Append(matrix[j, i]);
                 }
             }
 
